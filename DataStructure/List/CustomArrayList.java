@@ -6,15 +6,17 @@ import java.util.Arrays;
 
 public class CustomArrayList<E> implements CustomList<E> {
     private static final int DEFAULT_CAPACITY = 10;
-
-    private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = new Object[DEFAULT_CAPACITY];
     
     private Object[] elementData;
 
     private int size;
 
+    public CustomArrayList(int size) {
+        this.elementData = new Object[size];
+    }
+
     public CustomArrayList() {
-        this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
+        this(DEFAULT_CAPACITY);
     }
 
     @Override
