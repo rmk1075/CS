@@ -86,9 +86,8 @@ public class CustomHeap implements CustomTree {
     }
 
     private static void siftDownUsingComparator(int index, int target, Object[] es, int size, Comparator<Integer> cmp) {
-        int half = size >>> 1;
-        while(index < half) {
-            int child = (index << 1) + 1;
+        while(index * 2 <= size) {
+            int child = (index << 1);
             Object c = es[child];
             int right = child + 1;
             if(right < size && cmp.compare((Integer) c, (Integer) es[right]) > 0)
@@ -104,9 +103,8 @@ public class CustomHeap implements CustomTree {
     @SuppressWarnings("unchecked")
     private static void siftDownComparable(int index, int target, Object[] es, int size) {
         Comparable<Integer> key = (Comparable<Integer>) target;
-        int half = size >>> 1;
-        while(index < half) {
-            int child = (index << 1) + 1;
+        while(index * 2 <= size) {
+            int child = (index << 1);
             Object c = es[child];
             int right = child + 1;
             if(right < size && ((Comparable<Integer>) c).compareTo((Integer) es[right]) > 0)
