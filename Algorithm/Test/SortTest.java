@@ -5,6 +5,7 @@ import java.util.Random;
 
 import Algorithm.Sorting.Sort;
 import Algorithm.Sorting.BubbleSort.BubbleSort;
+import Algorithm.Sorting.InsertionSort.InsertionSort;
 import Algorithm.Sorting.SelectionSort.SelectionSort;
 
 public class SortTest {
@@ -27,6 +28,10 @@ public class SortTest {
 
         sort = new SelectionSort(arr);
         System.out.print("SelectionSort:\t");
+        System.out.println(Arrays.toString(sort.sort()));
+
+        sort = new InsertionSort(arr);
+        System.out.print("InsertionSort:\t");
         System.out.println(Arrays.toString(sort.sort()));
     }
 }
