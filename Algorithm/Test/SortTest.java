@@ -5,6 +5,7 @@ import java.util.Random;
 
 import Algorithm.Sorting.Sort;
 import Algorithm.Sorting.BubbleSort.BubbleSort;
+import Algorithm.Sorting.HeapSort.HeapSort;
 import Algorithm.Sorting.InsertionSort.InsertionSort;
 import Algorithm.Sorting.MergeSort.MergeSort;
 import Algorithm.Sorting.SelectionSort.SelectionSort;
@@ -37,6 +38,10 @@ public class SortTest {
 
         sort = new MergeSort(arr);
         System.out.print("MergeSort:\t");
+        System.out.println(Arrays.toString(sort.sort()));
+
+        sort = new HeapSort(arr);
+        System.out.print("HeapSort:\t");
         System.out.println(Arrays.toString(sort.sort()));
     }
 }
