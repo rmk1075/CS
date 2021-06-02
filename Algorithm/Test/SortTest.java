@@ -22,7 +22,6 @@ public class SortTest {
                 System.out.println(e);
                 break;
             }
-
         }
     }
 
