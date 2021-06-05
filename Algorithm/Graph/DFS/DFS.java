@@ -1,5 +1,7 @@
 package Algorithm.Graph.DFS;
 
+import java.util.Arrays;
+
 import Algorithm.Graph.Graph;
 
 public class DFS implements Graph {
@@ -35,12 +37,14 @@ public class DFS implements Graph {
     }
 
     @Override
-    public int[] search() {
+    public void search() {
         int[] result = new int[N];
         result[0] = 0;
         visited[0] = true;
         dfs(result, 1, 0);
-        return result;
+        
+        System.out.println("[DFS]");
+        System.out.println(Arrays.toString(result));
     }
     
 }

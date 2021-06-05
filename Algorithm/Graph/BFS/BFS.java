@@ -1,5 +1,6 @@
 package Algorithm.Graph.BFS;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -41,11 +42,13 @@ public class BFS implements Graph {
     }
 
     @Override
-    public int[] search() {
+    public void search() {
         int[] result = new int[N];
         result[0] = 0;
         visited[0] = true;
         bfs(result, 1, 0);
-        return result;
+
+        System.out.println("[BFS]");
+        System.out.println(Arrays.toString(result));
     }
 }

@@ -1,5 +1,6 @@
 package Algorithm.Graph.Dijkstra;
 
+import java.util.Arrays;
 import java.util.PriorityQueue;
 
 import Algorithm.Graph.Graph;
@@ -54,9 +55,12 @@ public class Dijkstra implements Graph {
     }
 
     @Override
-    public int[] search() {
-        int[] result = dijkstra(0);
-        return result;
+    public void search() {
+        System.out.println("[Dijkstra]");
+        for(int i = 0; i < N; i++) {
+            for(int j = 0; j < N; j++) visited[j] = false;
+            System.out.println(Arrays.toString(dijkstra(i)));
+        }
     }
     
     class Node implements Comparable<Node> {
