@@ -19,3 +19,9 @@
     - 변의 가중치가 음이거나 양인 가중 그래프에서 최단 경로들을 찾는 알고리즘
 
     - time complexity: O(V^3)
+
+5. Kruskal
+
+    - 가중치가 작은 Edge부터 선택하여 MST를 구하는 알고리즘
+
+    - time complexity: O(E log V)
