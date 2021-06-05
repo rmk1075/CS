@@ -7,6 +7,7 @@ import Algorithm.Graph.Graph;
 import Algorithm.Graph.BFS.BFS;
 import Algorithm.Graph.DFS.DFS;
 import Algorithm.Graph.Dijkstra.Dijkstra;
+import Algorithm.Graph.FloydWarshall.FloydWarshall;
 
 public class GraphTest {
     public static void main(String[] args) {
@@ -33,16 +34,12 @@ public class GraphTest {
         System.out.println();
         
         Graph graph;
-        int[] result;
         
         graph = new DFS(map);
-        result = graph.search();
-        System.out.println(Arrays.toString(result));
+        graph.search();
 
         graph = new BFS(map);
-        result = graph.search();
-        System.out.println(Arrays.toString(result));
-
+        graph.search();
 
         int[][] weightedMap = new int[N][N];
         for(int i = 0; i < N; i++) {
@@ -59,7 +56,9 @@ public class GraphTest {
         System.out.println();
 
         graph = new Dijkstra(weightedMap);
-        result = graph.search();
-        System.out.println(Arrays.toString(result));
+        graph.search();
+
+        graph = new FloydWarshall(weightedMap);
+        graph.search();
     }
 }
