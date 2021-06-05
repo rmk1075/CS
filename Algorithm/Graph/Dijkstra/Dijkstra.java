@@ -63,7 +63,7 @@ public class Dijkstra implements Graph {
         }
     }
     
-    class Node implements Comparable<Node> {
+    private class Node implements Comparable<Node> {
         int index;
         int weight;
 
