@@ -24,4 +24,12 @@
 
     - 가중치가 작은 Edge부터 선택하여 MST를 구하는 알고리즘
 
+    - Edge를 선택할 때 cycle을 생성하는지 안하는지 확인을 한다. (union-find 사용)
+
+    - time complexity: O(E log V)
+
+6. Prim
+
+    - 인접한 Vertex들 중에 가장 weight가 작은 edge로 연결된 vertex를 추가해가며 MST를 구하는 알고리즘
+
     - time complexity: O(E log V)

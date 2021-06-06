@@ -9,6 +9,7 @@ import Algorithm.Graph.DFS.DFS;
 import Algorithm.Graph.Dijkstra.Dijkstra;
 import Algorithm.Graph.FloydWarshall.FloydWarshall;
 import Algorithm.Graph.Kruskal.Kruskal;
+import Algorithm.Graph.Prim.Prim;
 
 public class GraphTest {
     public static void main(String[] args) {
@@ -63,6 +64,9 @@ public class GraphTest {
         graph.search();
 
         graph = new Kruskal(weightedMap);
+        graph.search();
+
+        graph = new Prim(weightedMap);
         graph.search();
     }
 }
