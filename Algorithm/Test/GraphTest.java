@@ -5,6 +5,7 @@ import java.util.Random;
 
 import Algorithm.Graph.Graph;
 import Algorithm.Graph.BFS.BFS;
+import Algorithm.Graph.BellmanFord.BellmanFord;
 import Algorithm.Graph.DFS.DFS;
 import Algorithm.Graph.Dijkstra.Dijkstra;
 import Algorithm.Graph.FloydWarshall.FloydWarshall;
@@ -61,6 +62,9 @@ public class GraphTest {
         graph.search();
 
         graph = new FloydWarshall(weightedMap);
+        graph.search();
+
+        graph = new BellmanFord(weightedMap);
         graph.search();
 
         graph = new Kruskal(weightedMap);
