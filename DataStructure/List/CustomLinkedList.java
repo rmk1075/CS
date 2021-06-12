@@ -12,12 +12,10 @@ public class CustomLinkedList<E> implements CustomList<E> {
     private static class Node<E> {
         E item;
         Node<E> next;
-        Node<E> prev;
 
         Node(Node<E> prev, E element, Node<E> next) {
             this.item = element;
             this.next = next;
-            this.prev = prev;
         }
     }
 
@@ -74,7 +72,6 @@ public class CustomLinkedList<E> implements CustomList<E> {
         while(node != null) {
             Node<E> next = node.next;
             node.item = null;
-            node.prev = null;
             node.next = null;
             node = next;
         }
@@ -82,7 +79,7 @@ public class CustomLinkedList<E> implements CustomList<E> {
         size = 0;
     }
 
-    public static void checkIndex(int index, int size) {
+    private static void checkIndex(int index, int size) {
         if(size <= index) {
             throw new IndexOutOfBoundsException();
         }
