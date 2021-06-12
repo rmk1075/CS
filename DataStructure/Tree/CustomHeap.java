@@ -22,7 +22,7 @@ public class CustomHeap implements CustomTree {
         }
         this.elementData = new Object[size];
         this.comparator = comparator;
-        this.size = 1;
+        this.size = 0;
     }
 
     private Object[] grow() {
@@ -38,10 +38,10 @@ public class CustomHeap implements CustomTree {
     }
 
     private static void siftUpUsingComparator(int index, int target, Object[] es, Comparator<Integer> cmp) {
-        while(1 < index) {
-            int parent = index / 2;
+        while(0 < index) {
+            int parent = (index - 1) / 2;
             Object e = es[parent];
-            if(cmp.compare(target, (Integer) e) >= 0)
+            if(cmp.compare(target, (Integer) e) > 0)
                 break;
             es[index] = e;
             index = parent;
@@ -51,10 +51,10 @@ public class CustomHeap implements CustomTree {
 
     private static void siftUpComparable(int index, int target, Object[] es) {
         Comparable<Integer> key = (Comparable<Integer>) target;
-        while(1 < index) {
-            int parent = index / 2;
+        while(0 < index) {
+            int parent = (index - 1) / 2;
             Object e = es[parent];
-            if(key.compareTo((Integer) e) >= 0)
+            if(key.compareTo((Integer) e) > 0)
                 break;
             es[index] = e;
             index = parent;
@@ -64,14 +64,19 @@ public class CustomHeap implements CustomTree {
 
     @Override
     public boolean insert(int value) {
-        for(int i = 1; i < this.size; i++) {
+        // check the value is unique or not
+        for(int i = 0; i < this.size; i++) {
             if(this.elementData[i].equals(value)) {
                 return false;
             }
         }
+
+        // check array size
         if(this.elementData.length <= size) {
             this.elementData = grow();
         }
+
+        // compare and insert
         siftUp(size, value);
         this.size++;
         return true;
@@ -86,8 +91,8 @@ public class CustomHeap implements CustomTree {
     }
 
     private static void siftDownUsingComparator(int index, int target, Object[] es, int size, Comparator<Integer> cmp) {
-        while(index * 2 <= size) {
-            int child = (index << 1);
+        while(index * 2 + 1 <= size) {
+            int child = (index << 1) + 1;
             Object c = es[child];
             int right = child + 1;
             if(right < size && cmp.compare((Integer) c, (Integer) es[right]) > 0)
@@ -103,8 +108,8 @@ public class CustomHeap implements CustomTree {
     @SuppressWarnings("unchecked")
     private static void siftDownComparable(int index, int target, Object[] es, int size) {
         Comparable<Integer> key = (Comparable<Integer>) target;
-        while(index * 2 <= size) {
-            int child = (index << 1);
+        while(index * 2 + 1 <= size) {
+            int child = (index << 1) + 1;
             Object c = es[child];
             int right = child + 1;
             if(right < size && ((Comparable<Integer>) c).compareTo((Integer) es[right]) > 0)
@@ -135,7 +140,7 @@ public class CustomHeap implements CustomTree {
 
     @Override
     public boolean remove(int value) {
-        for(int i = 1; i <= this.size; i++) {
+        for(int i = 0; i <= this.size; i++) {
             if(this.elementData[i].equals(value)) {
                 removeAt(i);
                 return true;
@@ -144,9 +149,9 @@ public class CustomHeap implements CustomTree {
         return false;
     }
 
-    public void preOrder(int index) {
-        System.out.println(elementData[index]);
-        int next = index * 2;
+    private void preOrder(int index) {
+        System.out.print(elementData[index] + " ");
+        int next = index * 2 + 1;
         if(next < this.size) {
             preOrder(next);
         }
@@ -157,16 +162,17 @@ public class CustomHeap implements CustomTree {
 
     @Override
     public void preOrder() {
-        if(this.size != 1)
-            preOrder(1);
+        if(this.size != 0)
+            preOrder(0);
+        System.out.println();
     }
 
-    public void inOrder(int index) {
-        int next = index * 2;
+    private void inOrder(int index) {
+        int next = index * 2 + 1;
         if(next < this.size) {
             inOrder(next);
         }
-        System.out.println(this.elementData[index]);
+        System.out.print(this.elementData[index] + " ");
         if(next + 1 < this.size) {
             inOrder(next + 1);
         }
@@ -174,24 +180,26 @@ public class CustomHeap implements CustomTree {
 
     @Override
     public void inOrder() {
-        if(this.size != 1)
-            inOrder(1);
+        if(this.size != 0)
+            inOrder(0);
+        System.out.println();
     }
 
-    public void postOrder(int index) {
-        int next = index * 2;
+    private void postOrder(int index) {
+        int next = index * 2 + 1;
         if(next < this.size) {
             postOrder(next);
         }
         if(next + 1 < this.size) {
             postOrder(next + 1);
         }
-        System.out.println(this.elementData[index]);
+        System.out.print(this.elementData[index] + " ");
     }
 
     @Override
     public void postOrder() {
-        if(this.size != 1)
-            postOrder(1);
+        if(this.size != 0)
+            postOrder(0);
+        System.out.println();
     }
 }
