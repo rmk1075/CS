@@ -31,12 +31,14 @@ public class Kruskal implements Graph {
         }
     }
 
+    // union-find 알고리즘을 통해 해당 그룹의 index 찾기
     public int find(int v) {
         if(visited[v] == v) return v;
         return find(visited[v]);
     }
 
     private void kruskal() {
+        // Edge를 priority queue를 사용하여 오름차순으로 정렬
         PriorityQueue<Edge> pq = new PriorityQueue<>();
         for(int i = 0; i < N; i++) {
             for(int j = 0; j < i; j++) {
@@ -51,10 +53,10 @@ public class Kruskal implements Graph {
         while(!pq.isEmpty()) {
             Edge edge = pq.poll();
             int v1 = edge.v1, v2 = edge.v2;
-            int p1 = find(v1), p2 = find(v2);
+            int p1 = find(v1), p2 = find(v2);   // 각 정점 그룹의 index를 찾아서 cycle 여부를 판단한다.
             if(p1 == p2)
                 continue;
-            visited[p1] = p2;
+            visited[p1] = p2; // 한 그룹으로 연결된 정점들의 index를 하나로 통일한다.
             graph[v1][v2] = graph[v2][v1] = edge.weight;
             weight += edge.weight;
         }
