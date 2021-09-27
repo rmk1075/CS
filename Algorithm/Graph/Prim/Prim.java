@@ -1,7 +1,6 @@
 package Algorithm.Graph.Prim;
 
 import java.util.Arrays;
-import java.util.PriorityQueue;
 
 import Algorithm.Graph.Graph;
 
@@ -25,6 +24,21 @@ public class Prim implements Graph {
         }
     }
 
+    // 아직 MST에 포함되지 않은 정점 중 최단 거리의 정점을 찾는다.
+    private int find(int[] vertices) {
+        int vertex = -1;
+        int minWeight = Integer.MAX_VALUE;
+        for(int i = 0; i < N; i++) {
+            if(visited[i]) continue;
+            if(vertices[i] < minWeight) {
+                minWeight = vertices[i];
+                vertex = i;
+            }
+        }
+
+        return vertex;
+    }
+
     private int[][] prim() {
         int[][] result = new int[N][N];
         for(int i = 0; i < N; i++) {
@@ -33,19 +47,27 @@ public class Prim implements Graph {
             }
         }
 
+        // 각 정점의 연결 상태를 저장하는 배열
+        int[] parent = new int[N];
+        parent[0] = 0;
+
+        // 각 정점들의 최소 거리
+        int[] vertices = new int[N];
+        // 첫번째 노드를 제외하고는 INF로 초기화
+        for(int i = 1; i < N; i++) vertices[i] = Integer.MAX_VALUE;
+
         int count = 0;
-        PriorityQueue<Edge> pq = new PriorityQueue<>();
-        pq.add(new Edge(0, 0, 0));
-        while(!pq.isEmpty() && count < N - 1) {
-            Edge edge = pq.poll();
-            int i = edge.v2;
-            if(visited[i]) continue;
-            visited[i] = true;
-            weight += edge.weight;
-            result[edge.v1][i] = result[i][edge.v1] = edge.weight;
-            for(int j = 0; j < N; j++) {
-                if(i == j || visited[j]) continue;
-                pq.add(new Edge(i, j, graph[i][j]));
+        while(count++ < N) {
+            int vertex = find(vertices);
+            visited[vertex] = true;
+            result[parent[vertex]][vertex] = result[vertex][parent[vertex]] = vertices[vertex];
+            this.weight += vertices[vertex];
+
+            // 새로 추가되는 정점과 인접한 정점 중 아직 포함되지 않은 정점들에 대해 weight를 업데이트 한다.
+            for(int i = 0; i < N; i++) {
+                if(graph[vertex][i] == Integer.MAX_VALUE || visited[i] || vertices[i] < graph[vertex][i]) continue;
+                vertices[i] = graph[vertex][i];
+                parent[i] = vertex;
             }
         }
 
@@ -60,22 +82,6 @@ public class Prim implements Graph {
         System.out.println("weight of MST: " + weight);
         for(int i = 0; i < N; i++) {
             System.out.println(Arrays.toString(graph[i]));
-        }
-    }
-
-    private class Edge implements Comparable<Edge> {
-        int v1, v2;
-        int weight;
-
-        public Edge(int v1, int v2, int weight) {
-            this.v1 = v1;
-            this.v2 = v2;
-            this.weight = weight;
-        }
-
-        @Override
-        public int compareTo(Edge o) {
-            return Integer.compare(weight, o.weight);
         }
     }
 }
