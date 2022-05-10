@@ -54,6 +54,15 @@ public class CustomArrayList<E> implements List<E> {
         }
     }
 
+    /**
+     * 리스트의 데이터 저장공간 (배열) 을 늘려준다.
+     * 매개변수로 최소 용량 minCapacity 를 입력받는다.
+     * - 현재 크기가 0인 경우, minCapacity 와 DEFAULT_CAPACITY 중 더 큰 값으로 크기를 맞춘다.
+     * - 0이 아닌 경우, minCapacity 와 현재 크기의 2배를 비교하여 더 큰 값으로 크기를 맞춘다.
+     * 
+     * @param minCapacity
+     * @return
+     */
     public Object[] grow(int minCapacity) {
         int oldCapacity = elementData.length;
         if(oldCapacity == 0) {
@@ -84,13 +93,7 @@ public class CustomArrayList<E> implements List<E> {
         }
         return false;
     }
-
-    @Override
-    public Iterator<E> iterator() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
+    
     @Override
     public Object[] toArray() {
         return Arrays.copyOf(elementData, size);
@@ -227,6 +230,12 @@ public class CustomArrayList<E> implements List<E> {
         }
         return index;
     }
+    
+    @Override
+    public Iterator<E> iterator() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
     @Override
     public ListIterator<E> listIterator() {
@@ -240,10 +249,11 @@ public class CustomArrayList<E> implements List<E> {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<E> subList(int fromIndex, int toIndex) {
-        // TODO Auto-generated method stub
-        return null;
+        if(fromIndex < 0 || size <= toIndex) throw new IllegalArgumentException("Illegal index: " + fromIndex + " " + toIndex);
+        return Arrays.asList((E[]) Arrays.copyOfRange(elementData, fromIndex, toIndex));
     }
 
 }

@@ -1,11 +1,12 @@
 package DataStructure.Test;
 
+import java.util.List;
+
 import DataStructure.List.CustomArrayList;
-import DataStructure.List.CustomList;
 
 public class ArrayListTest {
     public static void main(String[] args) {
-        CustomList<String> list = new CustomArrayList<>();
+        List<String> list = new CustomArrayList<>();
         System.out.println("**** size of list: " + list.size());
 
         System.out.println("**** add a, b, c to list");
@@ -40,5 +41,9 @@ public class ArrayListTest {
         for(int i = 0; i < list.size(); i++) {
             System.out.println(i + ": " + list.get(i));
         }
+
+        System.out.println("**** print sublist (index 2 ~ 5)");
+        List<String> subList = list.subList(2, 6);
+        subList.forEach(e -> System.out.println(e));
     }
 }
