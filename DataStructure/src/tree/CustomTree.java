@@ -1,4 +1,4 @@
-package DataStructure.Tree;
+package DataStructure.src.tree;
 
 public interface CustomTree {
     boolean insert(int value);

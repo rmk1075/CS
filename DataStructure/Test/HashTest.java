@@ -1,6 +1,6 @@
-package DataStructure.Test;
+package DataStructure.test;
 
-import DataStructure.Hash.CustomHash;
+import DataStructure.src.hash.CustomHash;
 
 public class HashTest {
     public static void main(String[] args) {

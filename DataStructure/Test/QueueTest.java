@@ -1,6 +1,6 @@
-package DataStructure.Test;
+package DataStructure.test;
 
-import DataStructure.Queue.CustomQueue;
+import DataStructure.src.queue.CustomQueue;
 
 public class QueueTest {
     public static void main(String[] args) {

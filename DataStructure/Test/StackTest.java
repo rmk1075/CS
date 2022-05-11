@@ -1,6 +1,6 @@
-package DataStructure.Test;
+package DataStructure.test;
 
-import DataStructure.Stack.CustomStack;
+import DataStructure.src.stack.CustomStack;
 
 public class StackTest {
     public static void main(String[] args) {

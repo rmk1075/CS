@@ -1,4 +1,4 @@
-package DataStructure.Tree;
+package DataStructure.src.tree;
 
 public class CustomBinaryTree implements CustomTree {
     public class Node {

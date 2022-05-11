@@ -1,8 +1,8 @@
-package DataStructure.Test;
+package DataStructure.test;
 
 import java.util.Random;
 
-import DataStructure.Tree.CustomBinaryTree;
+import DataStructure.src.tree.CustomBinaryTree;
 
 public class TreeTest {
     public static void main(String[] args) {

@@ -1,11 +1,10 @@
-package DataStructure.Test;
+package DataStructure.test;
 
-import DataStructure.List.CustomLinkedList;
-import DataStructure.List.CustomList;
+import DataStructure.src.list.CustomLinkedList;
 
 public class LinkedListTest {
     public static void main(String[] args) {
-        CustomList<String> list = new CustomLinkedList<>();
+        CustomLinkedList<String> list = new CustomLinkedList<>();
         System.out.println("**** size of list: " + list.size());
 
         System.out.println("**** add a, b, c to list");

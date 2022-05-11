@@ -1,4 +1,4 @@
-package DataStructure.Tree;
+package DataStructure.src.tree;
 
 import java.util.Arrays;
 import java.util.Comparator;

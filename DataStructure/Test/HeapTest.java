@@ -1,6 +1,6 @@
-package DataStructure.Test;
+package DataStructure.test;
 
-import DataStructure.Tree.CustomHeap;
+import DataStructure.src.tree.CustomHeap;
 
 public class HeapTest {
     public static void main(String[] args) {

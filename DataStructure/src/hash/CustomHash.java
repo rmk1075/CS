@@ -1,4 +1,4 @@
-package DataStructure.Hash;
+package DataStructure.src.hash;
 
 import java.util.LinkedList;
 

@@ -1,4 +1,4 @@
-package DataStructure.Queue;
+package DataStructure.src.queue;
 
 public class CustomQueue<E> {
     private Node<E> front;

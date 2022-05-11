@@ -1,11 +1,10 @@
-package DataStructure.Test;
+package DataStructure.test;
 
-import DataStructure.List.CustomArrayList;
-import DataStructure.List.CustomList;
+import DataStructure.src.list.CustomArrayList;
 
 public class ArrayListTest {
     public static void main(String[] args) {
-        CustomList<String> list = new CustomArrayList<>();
+        CustomArrayList<String> list = new CustomArrayList<>();
         System.out.println("**** size of list: " + list.size());
 
         System.out.println("**** add a, b, c to list");
