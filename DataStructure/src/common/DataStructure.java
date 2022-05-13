@@ -1,9 +1,10 @@
 package DataStructure.src.common;
 
 public interface DataStructure<E> {
-    public long size();
+    public int size();
     public boolean isEmpty();
     public boolean contains(E e);
-    public void add(E e);
+    public boolean add(E e);
     public Object remove(E e);
+    public void clear();
 }
