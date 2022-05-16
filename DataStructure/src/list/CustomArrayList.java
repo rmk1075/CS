@@ -1,10 +1,9 @@
 package DataStructure.src.list;
 
+import DataStructure.src.common.DataStructure;
+
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 /**
  * ArrayList
@@ -15,7 +14,7 @@ import java.util.ListIterator;
  * 배열을 기반으로 하기 때문에 인덱스를 통한 접근에서 유리하다.
  * 하지만 삽입에서는 요소의 개수가 capacity 에 도달하는 경우 확장을 해주어야 하기 때문에 성능적인 측면에서 불리하다.
  */
-public class CustomArrayList<E> implements List<E> {
+public class CustomArrayList<E> implements DataStructure<E> {
     private static final int DEFAULT_CAPACITY = 10; // 기본 capacity
     
     private Object[] elementData; // 데이터 저장 공간
@@ -54,17 +53,17 @@ public class CustomArrayList<E> implements List<E> {
         }
     }
 
+    public Object[] grow() {
+        return grow(size + 1);
+    }
+
     public Object[] grow(int minCapacity) {
-        int oldCapacity = elementData.length;
+        int oldCapacity = size;
         if(oldCapacity == 0) {
             return elementData = new Object[Math.max(minCapacity, DEFAULT_CAPACITY)];
         } else {
             return elementData = Arrays.copyOf(elementData, oldCapacity + Math.max(oldCapacity, minCapacity - oldCapacity));
         }
-    }
-
-    public Object[] grow() {
-        return grow(size + 1);
     }
 
     @Override
@@ -78,56 +77,66 @@ public class CustomArrayList<E> implements List<E> {
     }
 
     @Override
-    public boolean contains(Object o) {
-        for(Object e : elementData) {
+    public void clear() {
+        for(int i = 0; i < size; i++) elementData[i] = null;
+        size = 0;
+    }
+
+    @Override
+    public boolean contains(E e) {
+        for(Object o : elementData) {
             if(o.equals(e)) return true;
         }
         return false;
     }
 
     @Override
-    public Iterator<E> iterator() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Object[] toArray() {
-        return Arrays.copyOf(elementData, size);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> T[] toArray(T[] a) {
-        a = (T[])Arrays.copyOf(elementData, size, a.getClass());
-        return a;
-    }
-
-    @Override
     public boolean add(E e) {
-        add(size, e);
+        return add(size, e);
+    }
+
+    public boolean add(int index, E e) {
+        if(elementData.length == index) elementData = grow();
+        elementData[index] = e;
+        size = index + 1;
         return true;
     }
 
     @Override
-    public boolean remove(Object o) {
+    public Object remove(E e) {
         int i = 0;
         for(; i < size; i++) {
-            if(o.equals(elementData[i])) break;
+            if(e.equals(elementData[i])) break;
         }
         remove(i);
         return false;
     }
 
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        for(Object e : c) {
+    public Object remove(int index) {
+        for(int i = index; i < size - 1; i++) {
+            elementData[i] = elementData[i + 1];
+        }
+        elementData[--size] = null;
+        return null;
+    }
+
+    public Object[] toArray() {
+        return Arrays.copyOf(elementData, size);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T[] toArray(T[] a) {
+        a = (T[])Arrays.copyOf(elementData, size, a.getClass());
+        return a;
+    }
+
+    public boolean containsAll(Collection<? extends E> c) {
+        for(E e : c) {
             if(!contains(e)) return false;
         }
         return true;
     }
 
-    @Override
     public boolean addAll(Collection<? extends E> c) {
         int newSize = size + c.size();
         if(elementData.length <= newSize) grow(newSize);
@@ -139,7 +148,6 @@ public class CustomArrayList<E> implements List<E> {
         return true;
     }
 
-    @Override
     public boolean addAll(int index, Collection<? extends E> c) {
         int csize = c.size();
         int newSize = size + csize;
@@ -157,33 +165,13 @@ public class CustomArrayList<E> implements List<E> {
         return true;
     }
 
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public void clear() {
-        for(int i = 0; i < size; i++) elementData[i] = null;
-        size = 0;
-    }
-
     @SuppressWarnings("unchecked")
-    @Override
     public E get(int index) {
         if(index < size) return (E) elementData[index];
         return null;
     }
 
     @SuppressWarnings("unchecked")
-    @Override
     public E set(int index, E element) {
         if(index < size) {
             E oldValue = (E) elementData[index];
@@ -193,24 +181,6 @@ public class CustomArrayList<E> implements List<E> {
         return null;
     }
 
-    @Override
-    public void add(int index, E element) {
-        if(elementData.length == index) elementData = grow();
-        elementData[index] = element;
-        size = index + 1;
-    }
-
-    @Override
-    public E remove(int index) {
-        int i = index;
-        for(; i < size - 1; i++) {
-            elementData[i] = elementData[i + 1];
-        }
-        elementData[--size] = null;
-        return null;
-    }
-
-    @Override
     public int indexOf(Object o) {
         int index = -1;
         for(int i = 0; i < size; i++) {
@@ -219,7 +189,6 @@ public class CustomArrayList<E> implements List<E> {
         return index;
     }
 
-    @Override
     public int lastIndexOf(Object o) {
         int index = -1;
         for(int i = size - 1; -1 < i; i--) {
@@ -227,23 +196,4 @@ public class CustomArrayList<E> implements List<E> {
         }
         return index;
     }
-
-    @Override
-    public ListIterator<E> listIterator() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public ListIterator<E> listIterator(int index) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<E> subList(int fromIndex, int toIndex) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
 }
