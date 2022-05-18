@@ -106,18 +106,22 @@ public class CustomArrayList<E> implements DataStructure<E> {
     public Object remove(E e) {
         int i = 0;
         for(; i < size; i++) {
-            if(e.equals(elementData[i])) break;
+            if(e.equals(elementData[i])) {
+                return remove(i);
+            }
         }
-        remove(i);
-        return false;
+        return null;
     }
 
     public Object remove(int index) {
+        if(size <= index) return null;
+
+        Object o = elementData[index];
         for(int i = index; i < size - 1; i++) {
             elementData[i] = elementData[i + 1];
         }
         elementData[--size] = null;
-        return null;
+        return o;
     }
 
     public Object[] toArray() {

@@ -1,6 +1,8 @@
 package DataStructure.src.queue;
 
-public class CustomQueue<E> {
+import DataStructure.src.common.DataStructure;
+
+public class CustomQueue<E> implements DataStructure<E> {
     private Node<E> front;
 
     private Node<E> rear;
@@ -13,7 +15,7 @@ public class CustomQueue<E> {
         E item;
         Node<E> next;
 
-        Node(Node<E> prev, E element, Node<E> next) {
+        Node(E element, Node<E> next) {
             this.item = element;
             this.next = next;
         }
@@ -25,7 +27,7 @@ public class CustomQueue<E> {
 
     public boolean offer(E e) {
         Node<E> last = rear;
-        Node<E> newNode = new Node<E>(rear, e, null);
+        Node<E> newNode = new Node<E>(e, null);
         rear = newNode;
         if(last == null) {
             front = newNode;
@@ -50,5 +52,37 @@ public class CustomQueue<E> {
             return null;
         }
         return front.item;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
+    public boolean contains(E e) {
+        Node<E> node = front;
+        while(node != null) {
+            if(node.item.equals(e)) return true;
+            node = node.next;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean add(E e) {
+        return this.offer(e);
+    }
+
+    @Override
+    public Object remove(E e) {
+        return null;
+    }
+
+    @Override
+    public void clear() {
+        front = null;
+        rear = null;
+        size = 0;
     }
 }

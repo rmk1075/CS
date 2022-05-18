@@ -3,7 +3,9 @@ package DataStructure.src.stack;
 import java.util.Arrays;
 import java.util.EmptyStackException;
 
-public class CustomStack<E> {
+import DataStructure.src.common.DataStructure;
+
+public class CustomStack<E> implements DataStructure<E> {
     private static final int DEFAULT_CAPACITY = 10;
 
     private Object[] elementData;
@@ -52,6 +54,35 @@ public class CustomStack<E> {
 
     @SuppressWarnings("unchecked")
     E elementData(int index) {
-        return (E) this.elementData[index];
+        return (E) elementData[index];
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
+    public boolean contains(E e) {
+        for(Object o : elementData) {
+            if(e.equals(o)) return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean add(E e) {
+        return this.push(e) != null;
+    }
+
+    @Override
+    public Object remove(E e) {
+        return null;
+    }
+
+    @Override
+    public void clear() {
+        elementData = new Object[DEFAULT_CAPACITY];
+        size = 0;
     }
 }
